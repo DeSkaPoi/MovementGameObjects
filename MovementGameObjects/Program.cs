@@ -1,21 +1,31 @@
-﻿using MovementGameObjects.Models;
+﻿using MovementGameObjects.Command;
+using MovementGameObjects.Models;
 using System.Drawing;
 
 internal class Program
 {
-    readonly static StarShip starShip = new StarShip(new Point(12, 5), new Point(12, 5), new object());
     private static void Main(string[] args)
     {
-        
-        StepMove stepMove = new StepMove(starShip);
+
+        StarShip starShip = new StarShip(new Point(12, 5), new Point(-7, 3), new object(), 100, 10, new Point(1, 1));
+
+        ICommand command = new StepRotateCommand(starShip);
+        ICommand command2 = new ChangeVelocityCommand(starShip);
+
+        Queue<ICommand> commands = new Queue<ICommand>();
+        commands.Enqueue(command);
+        commands.Enqueue(command2);
 
         try
         {
-            stepMove.Execute();
+            ICommand macroCommand = new MacroCommand(commands);
+            macroCommand.Execute();
         }
-        catch (Exception)
+        catch
         {
-
+            return;
         }
+
+        var point = starShip.GetVelocity;
     }
 }

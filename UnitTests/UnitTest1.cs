@@ -8,8 +8,8 @@ namespace UnitTests
         [Fact]
         public void Test1()
         {
-            StarShip starShip = new StarShip(new Point(12, 5), new Point(-7, 3), new object());
-            StepMove stepMove = new StepMove(starShip);
+            StarShip starShip = new StarShip(new Point(12, 5), new Point(-7, 3), new object(), 100, 10, new Point(-1, -1));
+            StepMoveCommand stepMove = new StepMoveCommand(starShip);
             stepMove.Execute();
 
             var point = starShip.GetPosition;
@@ -20,13 +20,12 @@ namespace UnitTests
         [Fact]
         public void Test2()
         {
-            StarShip starShip = new StarShip(new Point(12, 5), Point.Empty, new object());
-            StepMove stepMove = new StepMove(starShip);
+            StarShip starShip = new StarShip(new Point(12, 5), Point.Empty, new object(), 100, 10, new Point(-1, -1));
+            StepMoveCommand stepMove = new StepMoveCommand(starShip);
 
             try
             {
                 stepMove.Execute();
-                
             }
             catch (Exception e)
             {

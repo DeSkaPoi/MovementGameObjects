@@ -9,14 +9,18 @@ using System.Drawing;
 
 namespace MovementGameObjects.Models
 {
-    public class StepRotate : Rotate
+    public class StepRotateCommand : Rotate
     {
-        public StepRotate(IRotatable rotatable) : base(rotatable)
+        public StepRotateCommand(IRotatable rotatable) : base(rotatable)
         {
             
         }
 
-        public override void Execute(double angleRadian)
+        public override void CancelExecute()
+        {
+        }
+
+        public override void Execute()
         {
             var direction = _rotatable.GetDirection;
 

@@ -8,16 +8,22 @@ using System.Threading.Tasks;
 
 namespace MovementGameObjects.Models
 {
-    public class StarShip : IMovableStarship, IRotatableStarship
+    public class StarShip : IMovableStarship, IRotatableStarship, IConsumptionFuel, IConsumptionVelocity
     {
         private Point _position;
         private Point _velocity;
+        private Point _velocityAfterRotate;
         private object _direction;
-        public StarShip(Point position, Point velocity, object direction)
+        private int _fuelInLiters;
+        private readonly int _consumptionFuelPerVelocity;
+        public StarShip(Point position, Point velocity, object direction, int fuelInLiters, int consumptionFuelPerVelocity, Point velocityAfterRotate)
         {
             _position = position;
             _velocity = velocity;
             _direction = direction;
+            _fuelInLiters = fuelInLiters;
+            _consumptionFuelPerVelocity = consumptionFuelPerVelocity;
+            _velocityAfterRotate = velocityAfterRotate;
         }
 
         public Point GetPosition 
@@ -55,5 +61,14 @@ namespace MovementGameObjects.Models
                     throw new Exception("Неверный формат ввода данных");
             }
         }
+
+        public bool TryGetFuel => _fuelInLiters <= 0 ? false : true;
+
+        public int ConsumptionFuelPerVelocity => _consumptionFuelPerVelocity;
+
+        public int Fuel { get => _fuelInLiters; set => _fuelInLiters = value; }
+        public Point Velocity { get => _velocity; set => _velocity = value; }
+
+        public Point VelocityAfterRotate => _velocityAfterRotate;
     }
 }

@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 
 namespace MovementGameObjects.Models
 {
-    public class StepMove : Move
+    public class StepMoveCommand : Move
     {
-        public StepMove(IMovable movable) : base(movable)
+        public StepMoveCommand(IMovable movable) : base(movable)
         {
+        }
+
+        public override void CancelExecute()
+        {
+            throw new NotImplementedException();
         }
 
         public override void Execute()
